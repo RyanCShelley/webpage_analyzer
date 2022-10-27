@@ -46,7 +46,7 @@ number_images = []
 # Loop items in results
 for url in df['url']:
 	TotalImages = get_img_cnt(url) 
-    	if TotalImages is not None: # assuming the download was successful
+	if TotalImages is not None: # assuming the download was successful
 		number_images.append(TotalImages)
 	df["number_images"] = number_images
 
