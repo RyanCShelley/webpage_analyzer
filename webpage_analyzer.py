@@ -154,15 +154,6 @@ for url in df['url']:
 		word_count.append(wordcount)
 df["word_count_new"] = word_count
 
-df['title'] = df['title'].str.replace('@@',' ')
-df['meta_desc'] = df['meta_desc'].str.replace('@@',' ')
-df['h1'] = df['h1'].str.replace('@@',' ')
-df['h2'] = df['h2'].str.replace('@@',' ')
-df['h3'] = df['h3'].str.replace('@@',' ')
-df['h4'] = df['h4'].str.replace('@@',' ')
-df['h5'] = df['h5'].str.replace('@@',' ')
-df['h6'] = df['h6'].str.replace('@@',' ')
-df['img_alt'] = df['img_alt'].str.replace('@@',' ')
 
 st.write(df)
 
