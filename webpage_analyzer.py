@@ -80,33 +80,32 @@ def get_h3_cnt(url):
   	return h3
 
 def get_h4_cnt(url):
-  	response = requests.get(url)
- 	soup = BeautifulSoup(response.content)
-  	h4 = len(soup.find_all('h4'))
-  	return h4
+	response = requests.get(url)
+	soup = BeautifulSoup(response.content)
+	h4 = len(soup.find_all('h4'))
+	return h4
 
 def get_h5_cnt(url):
-  	response = requests.get(url)
-  	soup = BeautifulSoup(response.content)
-  	h5 = len(soup.find_all('h5'))
-  	return h5
+	response = requests.get(url)
+	soup = BeautifulSoup(response.content)
+	h5 = len(soup.find_all('h5'))
+	return h5
 
 def get_h6_cnt(url):
-  	response = requests.get(url)
-  	soup = BeautifulSoup(response.content)
-  	h6 = len(soup.find_all('h6'))
-  	return h6
+	response = requests.get(url)
+	soup = BeautifulSoup(response.content)
+	h6 = len(soup.find_all('h6'))
+	return h6
 
 total_num_headers = []
 
 for url in df['url']:
 	TotalHeaders = get_h_cnt(url) 
- 	if TotalHeaders is not None: # assuming the download was successful
+	if TotalHeaders is not None: # assuming the download was successful
 		total_num_headers.append( TotalHeaders)
-		
 	df["total_number_headers"] = total_num_headers
-num_h1 = []
 
+num_h1 = []
 
 for url in df['url']:
   	h1 = get_h1_cnt(url) 
@@ -115,6 +114,7 @@ for url in df['url']:
 	df["number_h1"] = num_h1
 	
 num_h2 = []
+
 for url in df['url']:
 	h2 = get_h2_cnt(url) 
   	if h2 is not None: # assuming the download was successful
