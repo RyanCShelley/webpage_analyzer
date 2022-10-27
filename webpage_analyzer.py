@@ -27,10 +27,9 @@ if uploaded_file is not None:
 
 	crawl_df = pd.read_json('list_crawl.jl', lines=True)
 
-
-    df = crawl_df[['url','title','meta_desc', "h1", "h2", "h3", "h4", "h5", "h6", 'img_alt', 'img_src']].copy()
-    df['title'] = df['title'].str.replace('@@',', ')
-    df['meta_desc'] = df['meta_desc'].str.replace('@@',', ')
+	df = crawl_df[['url','title','meta_desc', "h1", "h2", "h3", "h4", "h5", "h6", 'img_alt', 'img_src']].copy()
+	df['title'] = df['title'].str.replace('@@',', ')
+	df['meta_desc'] = df['meta_desc'].str.replace('@@',', ')
     df['h1'] = df['h1'].str.replace('@@',', ')
     df['h2'] = df['h2'].str.replace('@@',', ')
     df['h3'] = df['h3'].str.replace('@@',', ')
