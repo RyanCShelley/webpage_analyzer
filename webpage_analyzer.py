@@ -15,8 +15,6 @@ st.caption('The .csv file must contain a header named url')
 
 uploaded_file = st.file_uploader("Choose a file")
 
-input("Once file is loaded, please press enter to continue.") 
-
 if uploaded_file is not None:
 	df = pd.read_csv(uploaded_file)
 
