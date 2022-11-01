@@ -14,6 +14,7 @@ st.subheader('Upload a spread sheet of URLs')
 st.caption('The .csv file must contain a header named url')
 
 uploaded_file = st.file_uploader("Choose a file")
+input("Press Enter to continue ") 
 
 if uploaded_file is not None:
 	df = pd.read_csv(uploaded_file)
