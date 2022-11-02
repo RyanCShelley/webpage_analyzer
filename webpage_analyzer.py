@@ -100,10 +100,6 @@ if query is not None:
     results = google_search(query)
     df = pd.DataFrame(results)
 
-if st.checkbox('Show SERP Data'):
-    st.subheader('Top Ten Results')
-    st.write(df)
-
 
 
 def get_img_cnt(url):
@@ -118,7 +114,7 @@ for url in df['url']:
 	TotalImages = get_img_cnt(url) 
 	if TotalImages is not None: # assuming the download was successful
 		number_images.append(TotalImages)
-df["number_images"] = number_images
+df["number images"] = number_images
 
 def get_h_cnt(url):
 	response = requests.get(url)
@@ -173,7 +169,7 @@ for url in df['url']:
 	TotalHeaders = get_h_cnt(url) 
 	if TotalHeaders is not None: # assuming the download was successful
 		total_num_headers.append( TotalHeaders)
-df["total_number_headers"] = total_num_headers
+df["total number headers"] = total_num_headers
 
 num_h1 = []
 
@@ -181,7 +177,7 @@ for url in df['url']:
   	h1 = get_h1_cnt(url) 
   	if h1 is not None: # assuming the download was successful
   		num_h1.append(h1)
-df["number_h1"] = num_h1
+df["number of h1"] = num_h1
 	
 num_h2 = []
 
@@ -189,7 +185,7 @@ for url in df['url']:
 	h2 = get_h2_cnt(url) 
 	if h2 is not None: # assuming the download was successful
 		num_h2.append(h2)
-df["number_h2"] = num_h2
+df["number of h2"] = num_h2
 
 num_h3 = []
 
@@ -197,7 +193,7 @@ for url in df['url']:
 	h3 = get_h3_cnt(url) 
 	if h3 is not None: # assuming the download was successful
 		num_h3.append(h3)
-df["number_h3"] = num_h3
+df["number of h3"] = num_h3
 
 num_h4 = []
 
@@ -205,7 +201,7 @@ for url in df['url']:
 	h4 = get_h4_cnt(url) 
 	if h4 is not None: # assuming the download was successful
 		num_h4.append(h4)
-df["number_h4"] = num_h4
+df["number of h4"] = num_h4
 	
 num_h5 = []
 
@@ -213,7 +209,7 @@ for url in df['url']:
 	h5 = get_h5_cnt(url) 
 	if h5 is not None: # assuming the download was successful
 		num_h5.append(h5)
-df["number_h5"] = num_h5
+df["number of h5"] = num_h5
 
 num_h6 = []
 
@@ -221,7 +217,7 @@ for url in df['url']:
 	h6 = get_h6_cnt(url) 
 	if h6 is not None: # assuming the download was successful
 		num_h6.append(h6)
-df["number_h6"] = num_h6
+df["number of h6"] = num_h6
 
 def get_word_cnt(url):
 	response = requests.get(url)
@@ -240,11 +236,11 @@ for url in df['url']:
 	wordcount = get_word_cnt(url) 
 	if  wordcount is not None: # assuming the download was successful
 		word_count.append(wordcount)
-df["word_count_new"] = word_count
+df["word count"] = word_count
 
-
-st.write(df)
 
 st.subheader('Check out your data!')
 
 st.caption('Below is the list of URLs with imformation about the content structure.')
+
+st.write(df)
