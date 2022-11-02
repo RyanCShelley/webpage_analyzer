@@ -7,7 +7,6 @@ import streamlit as st
 import urllib
 import pandas as pd
 import numpy as np
-import plotly.express as px
 from requests_html import HTML
 from requests_html import HTMLSession
 import random
