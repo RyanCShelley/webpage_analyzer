@@ -99,6 +99,9 @@ def google_search(query):
 if query is not None:
     results = google_search(query)
     df = pd.DataFrame(results)
+    df['rank'] = df.index + 1
+    first_column = df.pop('rank')
+    df.insert(0, 'rank', first_column)
 
 
 
