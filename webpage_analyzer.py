@@ -31,7 +31,7 @@ for i in range(1,4):
 
 st.title('Webpage Structure Analyzer')
 
-st.subheader('Review the structure of the pages in the top ten')
+st.subheader('Review the structure of the pages in the Top Ten Search Results')
 
 query = st.text_input("Put Your Target Keyword Here", value="Add Your Keyword")
 
