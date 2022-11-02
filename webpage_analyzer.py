@@ -29,7 +29,7 @@ for i in range(1,4):
     response = requests.get(url,headers=headers)
 
 
-st.title('Webpage Structure Analyzer')
+st.title('Analyze Structure of Ranking Content')
 
 st.subheader('Review the structure of the pages in the Top Ten Search Results')
 
