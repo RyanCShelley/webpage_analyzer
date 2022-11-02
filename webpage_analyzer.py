@@ -1,22 +1,110 @@
-
-import advertools as adv
-from advertools import crawl
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 from collections import Counter
 from string import punctuation
 import streamlit as st
+import urllib
+import pandas as pd
+import numpy as np
+import plotly.express as px
+from requests_html import HTML
+from requests_html import HTMLSession
+import random
+
+
+user_agent_list = [
+'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
+'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
+'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
+'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0',
+'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
+]
+url = 'https://httpbin.org/headers'
+for i in range(1,4):
+#Pick a random user agent
+    user_agent = random.choice(user_agent_list)
+#Set the headers 
+    headers = {'User-Agent': user_agent}
+#Make the request
+    response = requests.get(url,headers=headers)
+
 
 st.title('Webpage Structure Analyzer')
 
-st.subheader('Upload a spread sheet of URLs')
-st.caption('The .csv file must contain a header named url')
+st.subheader('Review the structure of the pages in the top ten')
 
-uploaded_file = st.file_uploader("Choose a file")
+query = st.text_input("Put Your Target Keyword Here", value="Add Your Keyword")
 
-if uploaded_file is not None:
-	df = pd.read_csv(uploaded_file)
+
+def get_source(url):
+    try:
+        session = HTMLSession()
+        response = session.get(url)
+        return response 
+    except requests.exceptions.RequestException as e:
+        print(e)
+       
+def scrape_google(query):
+    query = urllib.parse.quote_plus(query)
+    response = get_source("https://www.google.co.uk/search?q=" + query)
+    links = list(response.html.absolute_links)
+    google_domains = ('https://www.google.', 
+                      'https://google.', 
+                      'https://webcache.googleusercontent.', 
+                      'http://webcache.googleusercontent.', 
+                      'https://policies.google.',
+                      'https://support.google.',
+                      'https://maps.google.')
+
+    for url in links[:]:
+        if url.startswith(google_domains):
+            links.remove(url)
+
+    return links
+
+def get_results(query):
+    
+    query = urllib.parse.quote_plus(query)
+    response = get_source("https://www.google.com/search?q=" + query)
+    
+    return response
+
+def parse_results(response):
+    
+    css_identifier_result = ".tF2Cxc"
+    css_identifier_title = "h3"
+    css_identifier_link = ".yuRUbf a"
+    css_identifier_text = ".IsZvec"
+    
+    results = response.html.find(css_identifier_result)
+
+    output = []
+    
+    for result in results:
+
+        item = {
+            'title': result.find(css_identifier_title, first=True).text,
+            'url': result.find(css_identifier_link, first=True).attrs['href']
+        }
+        
+        output.append(item)
+        
+    return output
+
+
+def google_search(query):
+    response = get_results(query)
+    return parse_results(response)
+
+if query is not None:
+    results = google_search(query)
+    df = pd.DataFrame(results)
+
+if st.checkbox('Show SERP Data'):
+    st.subheader('Top Ten Results')
+    st.write(df)
+
 
 
 def get_img_cnt(url):
