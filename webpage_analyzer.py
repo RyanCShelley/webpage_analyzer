@@ -222,13 +222,10 @@ df["number of h6"] = num_h6
 def get_word_cnt(url):
 	response = requests.get(url)
 	soup = BeautifulSoup(response.content)
-	text_p = (''.join(s.findAll(text=True))for s in soup.findAll('p'))
-	c_p = Counter((x.rstrip(punctuation).lower() for y in text_p for x in y.split()))
-	text_div = (''.join(s.findAll(text=True))for s in soup.findAll('div'))
-	c_div = Counter((x.rstrip(punctuation).lower() for y in text_div for x in y.split()))
-	total = c_div + c_p
-	words = len(total)
-	return words
+	[s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+	visible_text = soup.getText()
+	count = len(visible_text.strip().split(" "))
+	return count
 
 word_count = []
 
@@ -236,6 +233,7 @@ for url in df['url']:
 	wordcount = get_word_cnt(url) 
 	if  wordcount is not None: # assuming the download was successful
 		word_count.append(wordcount)
+		
 df["word count"] = word_count
 
 
