@@ -220,12 +220,29 @@ for url in df['url']:
 df["number of h6"] = num_h6
 
 def get_word_cnt(url):
-	response = requests.get(url)
-	soup = BeautifulSoup(response.content)
-	[s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
-	visible_text = soup.getText()
-	count = len(visible_text.strip().split(" "))
-	return count
+  res = requests.get(url)
+  html_page = res.content
+  soup = BeautifulSoup(html_page, 'html.parser')
+  text = soup.find_all(text=True)
+  output = ''
+  blacklist = [
+    '[document]',
+    'noscript',
+    'header',
+    'html',
+    'meta',
+    'head', 
+    'input',
+    'script',
+    'style']
+  for t in text:
+    if t.parent.name not in blacklist:
+      output += '{} '.format(t)
+  output = output.strip()
+  output = output.replace('\n','')
+  word_list = output.split()
+  number_of_words = len(word_list)
+  return number_of_words
 
 word_count = []
 
