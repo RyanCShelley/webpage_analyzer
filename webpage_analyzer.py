@@ -276,5 +276,5 @@ st.download_button(
 
 st.subheader('Word Count')
 
-st.bar_chart(data=df, x="word count", y=None, width=0, height=0, use_container_width=True)
+st.bar_chart(data=df, x="url", y="word count", width=100%, use_container_width=True)
 
