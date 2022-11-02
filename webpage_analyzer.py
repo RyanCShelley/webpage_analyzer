@@ -285,6 +285,19 @@ st.subheader('Total Number of Headers')
 
 st.bar_chart(data=df, x="rank", y="total number headers", use_container_width=True)
 
+st.subheader('Total Number of H1s')
+
+st.bar_chart(data=df, x="rank", y="number of h1", use_container_width=True)
+
+st.subheader('Total Number of H2s')
+
+st.bar_chart(data=df, x="rank", y="number of h2", use_container_width=True)
+
+st.subheader('Total Number of H3s')
+
+st.bar_chart(data=df, x="rank", y="number of h3", use_container_width=True)
+
+
 st.subheader('Total Number of Images')
 
 st.bar_chart(data=df, x="rank", y="number images", use_container_width=True)
