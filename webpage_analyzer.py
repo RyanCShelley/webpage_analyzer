@@ -279,13 +279,13 @@ st.download_button(
 
 st.subheader('Word Count')
 
-st.bar_chart(data=df, x="url", y="word count", use_container_width=True)
+st.bar_chart(data=df, x="rank", y="word count", use_container_width=True)
 
 st.subheader('Total Number of Headers')
 
-st.bar_chart(data=df, x="url", y="total number headers", use_container_width=True)
+st.bar_chart(data=df, x="rank", y="total number headers", use_container_width=True)
 
 st.subheader('Total Number of Images')
 
-st.bar_chart(data=df, x="url", y="number images", use_container_width=True)
+st.bar_chart(data=df, x="rank", y="number images", use_container_width=True)
 
