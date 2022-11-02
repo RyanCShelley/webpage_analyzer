@@ -244,3 +244,5 @@ st.subheader('Check out your data!')
 st.caption('Below is the list of URLs with imformation about the content structure.')
 
 st.write(df)
+
+st.download_button(Download Your Data, df, file_name=serp.csv)
